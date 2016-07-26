@@ -1,0 +1,476 @@
+一.2016.7.16 <javascript dom编程艺术>
+1.最好的做法是吧<script>标签放到HTML文档的最后，</body>标签之前：
+这样能使浏览器更快地加载页面.
+2.javascript语言里，变量和其他语法元素的名字都是区分字母大小写的。
+
+3.javascript变量名允许包含字母、数字、美元符号和下划线（但第一个字符不允许是数字），在命名变量时，用下划线来分隔各个单词，在命名函数时，从第二个单词的第一个字母写出大写形式（也就是所谓的驼峰命名法）,这样就方便一眼看出哪些是变量，哪些是函数。首选是驼峰命名法，删除中间的空白（下划线）,后面的每个新单词改用大写字母开头。：var myMood="happy";
+
+4.全局变量和局部变量
+可以用关键字var明确的为函数变量设定作用域，如果某个函数使用了var，那个变量就将被视为一个局部变量，他就只存在于这个函数的上下文中，反之，如果没有使用var，那个变量就将被视为一个全局变量，如果脚本里已经存在一个与之同名的全局变量，这个函数就会改变那个全局变量的值。
+
+4.javascript不需要进行类型声明，因此它是一种弱类型的语言。既可以在任何阶段改变变量的数据类型。
+var age="thirty three";
+    age=33;
+5.javasript的数据类型
+a. 字符串
+单引号或者双引号都可以。
+javascript用反斜线对字符进行转义：var mood='don\'t ask';其实也可以这样：var mood="don't ask";双引号包括单引号。
+不管如何，在同一个脚本中要保持前后一致。
+
+b.数值
+javascript允许使用带小数点的数值，并且允许任意位小数，这样的熟称为浮点数。
+
+c.布尔值--true or false;他不是字符串，不用用双引号或单引号
+
+d.数组；
+
+1).声明数组的同时还可以指定数组初始元素个数，也就是这个数组的长度（length）
+var beatles=Array(4);
+
+2).Javascrip不要求声明时必须有元素个数。可以完全不给元素个数。
+var beatles=Array();
+
+3).数组中的第一个下标是0而不是1；
+4).像数组添加元素的操作称为填充。（populating)
+数组的一个元素一个下标，下标必须用方括号括起来/
+var beatles=Array(4);
+veatles[0]="John";
+veatles[1]="Paul";
+veatles[2]="George";
+veatles[3]="Ringo";
+
+更好的方法是：声明数组的同时对他 进行填充。用逗号吧各个元素隔开。
+var beatles=Array("join","Paul","George","Ringo");
+6.对象
+1)对象的每个值都是对象的一个属性。创建对象使用Object关键字。，用点号获取属性。
+2）创建对象还有一种更简洁的语法，即花括号语法：
+例如：lennon对象也可以写成：
+var lennon={name:"Join",year:"1940",living:false};
+
+7.操作
+a.算术操作，加减乘除。
+b.可以把多个字符串首尾相连的操作叫拼接。甚至可以把数值和字符串拼接在一起。此时，数值被自动转换为字符串；
+
+8.条件语句
+if语句中的花括号本身并不是并不可少的，如果if语句中的花括号只有一条语句，就可以不用花括号，而且这条if语句的全部内容可以写在同一行上；
+ like: if(1>2)alert("the world has gone mad!");
+
+8.1比较操作符
+相等操作符==并不表示严格相等，要严格比较，就要使用另一种等号（===）这个全等操作符会执行严格的比较，不仅比较值，而且会比较变量的类型。
+var a=false;
+var b="";
+if(a==b){
+	alert("a equals b");
+}
+这种是会返回true的。含义是相同的。
+
+var a=false;
+var b="";
+if(a===b){
+	alert("a equals b");
+}
+这种会返回false；因为类型不一样。当然，对于不等于操作符！=也是如此。如果想比较严格不相等，就要用（！==）。
+9.逻辑操作符
+10.语句
+a.每一条语句都要以分号结尾，可以避免很多不完整的输入。也可以增进代码的性能
+b.最佳的实践是始终在控制语句中使用代码块-即使代码块中只有一条语句。可以让编码更清晰，且降低修改代码时出错的几率。
+
+11.函数
+a.应该先对函数作出定义再调用它们。
+b.可以用var关键字明确的为函数变量设定作用域；如果在某个函数中使用了var，那个变量就是被视为一个局部变量，它只存在这个函数的上下文中，反之，如果没有使用var,那个变量就被视为一个全局变量，如果脚本已经存在一个与之同名的全局变量，这个函数就会改变那个全局变量的值。
+使用var关键字定义变量可以避免任何形式的二义性隐患。
+
+12.对象
+a.在javascript中，属性和方法（函数）都是用“点”语法开来访问：
+object.propert
+object.method()
+12.1 内建函数，可以使用new关键词去初始化创建一个对象的新实例。
+Math对象的round方法可以把十进制数值舍入为一个与之最接近的整数：
+var num=7.561;
+var num=Math.round(num);
+alert(num);
+
+12.1.1Date对象可以用来存储和检索与特定日期和时间有关的信息。，在创建Date对象的新实例时，javascript解释器将自动地使用当前日期和时间对它进行初始化：
+var current date = new Date();
+Date对象提供了getDay()，getHours(),getMouth()等一系列方法，以供人们用来检索与特定日期有关的各种信息。例如，getDay()方法可以告诉我们给定日期是星期几：
+var today = current_date.getDay();
+内建对象就是本身就有的方法函数，例如数组，Date对象。Math对象。
+12.2 宿主对象：
+
+这个宿主是浏览器，由浏览器提供的预定义对象被称为宿主对象，宿主对象包括Form、Image和Element等，可以通过这些对象获得关于网页上的表单、图像和各种表单元素等信息。
+另一个就是document对象。
+
+
+13.DOM
+(5个常用的DOM方法：
+getElementById，
+getElementByTagName,
+getElementByClassName,
+getElementByAttribute和
+setAttribute)
+
+DOM的D是document（文档），负责把你编写的网页转换为一个文档对象/
+DOM的O是object（对象）与某个特定对象相关联的变量被称为这个对象的属性，只能
+DOM的M是model(模型)(map)地图浏览器提供了网页的(地图)模型,通过javascript来读取。
+
+13.1宿主对象最基础的对象就是Windows对象。
+通过某个对象去调用的函数被称为这个对象的方法。
+javascript语言里的对象可以分为三种类型。
+用户定义对象：程序员自行创建的对象。
+内建对象：内建在javacript的对象，如数组，Math\Date等
+宿主对象：由浏览器提供的对象。
+
+有到种方法可以获取元素节点，分别是通过元素ID，标签名字和类名字来获取。
+1.getElementById,id属性就像是个挂钩，一头连着文档的某个元素，另一头连着CSS样式表里的某个样式，DOM也可以使用这种挂钩。
+注意：javascript十分注重大小写。
+1.a 它是document对象特有的函数。函数名后面有一对圆括号。参数就是那个id属性的值。放在单引号或双引号。
+document.getElementById("purchases");这个调用会返回一个对象，这个对象对应着document对象里的一个独一无二的元素。
+
+事实上，文档中的每一个元素都是一个对象。利用DOM提供的方法能得到任何一个对象。
+2.getElementByTagName()
+a.这个方法返回的是一个数组。参数是标签的名字。
+like:document.getElementByTagName("li");
+注意：即使在整个文档里这个标签只有一个元素，getElementByTageName和getElementByclassName都返回一个数组。他们分别对应着文档里的一组特定的元素节点此时，这个数组的长度是1.
+
+b.获取和设置属性
+getAttribute方法就是获取属性，他只有一个参数，你打算查询的属性的名字：
+object.getAttribute(attribute)
+getAttribute方法不属于document对象，所以不能通过document对象调用。只能通过元素节点对象调用。
+
+if(title_test !=null)=if (title_text);但后者更简洁明了。
+
+setAttribute则可以更改属性节点的值
+a.如果setAttribute用在一个本身就偶这个属性的元素点上，这个属性的值就会被覆盖掉。
+b.通过setAttribute对文档作出修改后，通过浏览器的view source(查看源码）去查看源码时看到的仍是改变前的属性值。setAttribute作出的修改不会反映在文档本身的源代码里。
+这就体现了DOM的工作模式。先加载文档的静态内容，在动态刷新，动态刷新的不影响文档的静态内容。这就是他的威力：对文档内容刷新却不需要在浏览器里刷新页面。
+所以
+
+第四章。案例研究JavaScript的图片库
+toda ：进度到100/305；
+可以节省为庞大的图片库每个图片创建一个网页的时间。
+方法：把整个图片库的浏览链接集中安排到图片库的主页里，只有用户点击了这个主页的某个图片链接时才把相应的图片传给他。
+
+非DOM的解决方案：
+setAttribute方法是“第一级DOM"的组成部分。它可以设置任意元素节点的任意属性。
+例如：你想改变某个元素input元素的value值：
+elemen.value= "the new value";
+等价于：
+element。setAttritube("value","the new value");
+
+这种的方式虽然也可以，但是是老方法，只适用web文档。而DOM则适用任意文档。移植性更好。
+可以避免与兼容性有关的任何问题。所以还是用DOM方法
+
+4.4.1 childNodes属性
+它可以用来获取任何一个元素的所以子元素，他是一个包含这个元素的全部子元素的数组；
+
+想要函数在页面中加载时执行，这就需要使用onload事件处理函数；
+window.onload = countBodyChildren;
+这句的作用就是在页面加载时调用countBodyChildren函数；
+4.4.2 nodetype属性
+由childNodes属性返回的数字包含所有类型的节点，而不仅仅是元素节点。事实上，文档里几乎每一样东西都是一个节点，甚至包括空格和换行符都会被解释为节点，而他们全都被包含在childNodes属性返回的数组当中。每一个节点都有nodetype属性；
+
+nodeType的值是一个数字而不是英文字符串；它实际上有12种取值，但其中仅有3种具有实用价值；
+元素节点的noteType属性值是1；
+属性节点的noteType属性值是2；
+文本节点的noteType属性值是3；
+
+4.4.5nodeValue属性----------------实现文本的切换
+为了改变文本节点的值，然后使用DOM提供的nodeValue属性，他用来得到）设置）一个节点的值；
+node.nodeValue,<p>元素本身得到的nodeValue属性是一个空值，你需要的是<P>元素所包含的这段文的文本；但是包含在<p>元素的文本是另一个节点，他是<p>元素的第一个子节点；
+可以这样：
+alert（describtion.childNodes[0].nodeValue);
+
+4.4.6 firstChild 和 lastChild属性
+数组元素childNodes[0]等同于firstChild
+
+noe.childNodes[o]=node.firstChild
+noe.childNodes[node.childNodes.length-1]=node.lastChild;
+
+5.2平稳退化
+这种技术可以解决访问者使用的是不支持javascript的浏览器或者（因为讨厌广告）禁用了javascript。
+虽然某些功能无法使用，但最基本的操作仍能顺利完成/
+
+javascript使用Windows对象的open（）方法来创建新的浏览器窗口。
+Windows.open(url,name,features);
+a. url是在新窗口打开的网页的url地址。如果没有则是空白的窗口
+b. name是新的窗口的名字。
+c. 各种属性定义窗口的 尺寸，以及各种启用或禁用的功能。（要少而精）
+d. open()方法是使用BOM的一个好案例，他的功能对文档也无任何影响（那是DOM）的地盘，这个方法只与浏览环境有关。
+
+5.2.1  javascript:伪协议-为了调用javascript函数。
+它是一种非标准协议。javascript伪协议让我们通过一个链接来调用javascript函数。，但如果用户浏览器不支持javascript，则这个就毫无用处了。
+但在HTML文档里通过“javascript：”伪协议调用javascript代码的做法非常不好/。
+5.2.2内嵌的事件处理函数‘
+<a href="#" onclick="popUp('http://www.baidu.com/'); return false;">examble</a>
+因为HTML指令里使用了return false语句，所以这个链接并不会真的被打开。“#”符号是一个仅有文档内部使用的链接记号（单就这条指令而言，‘#’是未指任何目标的内部链接）,这个#只是为了创建空链接。
+但是这个方法与伪协议用javascript的方法同样糟糕。并没有平稳退化。如果用户禁用javascript功能。链接就没用了。
+
+为了平稳退化：在链接里把href属性设置在真实存在的URL地址。以此成为一个有效的链接；
+<a href="http://www.examble.com/" onclick="popUp('http://www.examble.com' );return false;">Examble </a>
+
+地址出现两次----使用this可代表任何一种当前元素；可以使用getAttribute（）方法提取出href的值；
+<a href="http://www.examble.com/" onclick="popUp(this.getAttribute('href’); return false;">Examble </a>
+最佳：
+还可以更加精简，当前链接的href属性还可以由DOM提供的this.href属性；
+<a href="http://www.examble.com/" onclick=popUp(this.href); return false;">Examble </a>
+最明显的不足是：每当需要打开新窗口时，就不得不把一些javascript代码嵌入标记文档中。
+
+5.3  CSS
+css的突出优点是，文档结构和文档样式的分离可以确保网页都能平稳退化。具备css支持的浏览器固然可以把网页呈现的美轮美奂，不支持或禁用css功能的浏览器同样可以把网页的内容按照正确的结果显示出来。
+所谓“渐进增强”就是用一些额外的信息层去包裹原始数据。
+5.4 分离javascript
+javascript语言不要求事件必须在HTML文档中处理，可以在外部javascript文件中把一个事件添加到HTML文档中的某个元素上：
+element.event = action..
+关键是获得这个事件的元素确定下来。可以利用class或者ID属性。利用getElementById
+getElementById（id).event = action;
+
+如果涉及到多个元素。利用getElementByTagName和getAttribute把事件添加到有着指定属性的一组元素上‘
+具体步骤：
+1.把文档里的所有链接全放入一个数组里/
+2.遍历数组；
+3.如果某个连接的class属性等于popUp，就表示这个链接在被点击时应该调用popUp()函数’
+注意要取消这个链接的默认行为，不让这个链接吧访问者带离当前窗口；
+var links = document.getElementsByTagName("a");
+for(var i=0;i<links.length;i++){
+    if(links[i].getAttribute("class)=="popUp"{
+    links[i].onclick = function(){
+        popUp(this.getAttribute{"href"));
+}
+}
+}
+
+5.5.1对象检测
+只要把某个方法打包到一个if语句里，就可以根据这条if语句的条件表达式的求值结果是true（这个方法存在），还是false（这个方法不存在）,来决定应该采取怎么样的行动。这种检测方法就是对象检测。
+if(method){
+     statements
+}
+如果浏览器不支持getElement（）方法，就永远不会执行此方法语句。，但会增加很多花括号。影响阅读理解
+function myFunction(){
+    if(document.getElementById){
+    statements using getElementById
+    }
+}
+如果把测试条件改为“如果你不理解这个方法，请离开”则更加简单。---逻辑非
+if( !method）  “---请离开”可以用一条return语句来实现。相当于中途退出函数。所以返回是false；
+if（！getElementById) {
+    return false;
+}
+也可以简写成if (!getElementById) return false;
+如果测试多个方法或者属性是否存在。就要用“逻辑或”
+if(!getElementById || !getElementByTagName) return false;
+
+5.6性能考虑
+5.6.1尽量少访问DOM和尽量减少标记
+关于访问DOM的：
+尽量把第一次搜索的结果保存在一个变量中，然后在循环中重复使用该结果。
+尽量减少代码冗余
+var links = document.getElementByTagName('a');
+if (links.length>0){
+    for(var i=0;i<links.length;I++){
+    //对每个链接点处理
+}
+}
+
+在多个函数都会取得一组类似元素的情况下，可以考虑重构代码。把搜索结果保存在一个全局变量里。。或者把一组元素直接以参数形式传递给函数；。尽量减少文档中的标记数量
+
+根据<javascript_DOM编程艺术第二版>的介绍：
+位于《head>块中的脚本会导致浏览器无法并行加载其他文件（如图像或者其他脚本）,一般来说，根据HTTP规范，浏览器每次从同一个域名中最多只能下载两个文件，而在下载脚本期间，浏览器不会下载其他任何文件，即使是来自不同域名的文件也不会下载，所以其他资源都要等到脚本加载完毕后才能下载。
+这样，在加载脚本时，window对象的load事件依然可以执行对文档进行各种操作。
+
+当有多个脚本文件时，推荐做法是把functiona.js、functionB.js、functionC。js和functionD.js合并到一个脚本文件中，这样可以减少加载页面时发送的请求数量。
+
+5.6.3 压缩脚本
+通过把脚本文件中不必要的字节，如空格和注释，统统删除，从而达到压缩文件的目的。很多工具可以达到这个效果。使用更短的变量名。重写部分代码等等。
+精简后的代码不容易看懂。但却精简文件。因此。你应该有两个版本
+一个是工作副本，可以修改代码并添加注释。
+另一个是精简副本，用于站点上，通常，为了与非精简版本区分开，最好在精简副本的文件上加上min字样：
+<script src="scripts/scriptName.min.js"></script>
+
+几个有代表性的代码压缩工具：
+Douglas Crockford的JSMin(http://www.crockford.com/javasrcript/jsmin.html);
+谷歌的Closure Compiler(http://closure-compiler.appspot.com/home).
+DOM脚本编程工作的概念和实践：
+平稳退化
+分离javascript
+向后兼容
+性能考虑
+
+在js文件中新建好一个函数后，在最后需要共享onlad函数；执行函数才能对onclik事件进行绑定：
+window.onload = prepareGallery；
+若有两个或多个函数时，若逐一绑定到onload函数上，只有最后一个才会被实际执行。！
+window.onload =firstFunction;
+window.onload =secondFunction;
+所以就有了共享onload函数；
+可以先创建一个匿名函数来容纳这两个函数，然后把那个匿名函数绑定到onload事件上。
+window。onload = function(){
+    window.onload =firstFunction;
+    window.onload =secondFunction;
+}
+这个在绑定的函数不是很多的场合就很适合，也是最简单的解决方案
+更好的解决方案：
+不管你打算加载多少个函数，她都可以应付自如。这个函数就是addLoadEvent,只有一个参数，就是打算在也没加载完毕后执行的函数的名字；
+1.把现有的window.onload事件处理函数的值存入变量oldonload。
+2.如果在这个处理函数上还没有绑定任何函数，就像平时那样把新函数添加给他就可；
+3.如果在这个处理函数上已经绑定了一些函数，就把新函数追加到现有指令（函数）的末尾；
+下面这个就代码清单。要执行只需要写上如下代码：
+addLoadEvent(firstFunction);
+addLoadEvent(secondFunction);
+function addLoadEvent(func){
+    var oldonload = window.onload;
+    if(typeof window.onload  != 'function') {
+        window.onload = func;
+    }else {
+        window.onload = function(){
+            oldonload();
+            func();
+        }
+    }
+}
+用户并不是只会使用鼠标点击这个链接：
+因此有个叫onkeypress的事件处理函数是专门用来处理键盘事件的。按下键盘上任何一个按键都会触发onkeypress事件。
+如果想让onkeypress事件与onclick事件触发同样的行为。可以简单的复制指令即可：
+link[i].onclick = function() {
+    return showPic(this) ? false ：true;
+    }
+link[i].onkeypress = function(){
+    return showPic(this) ? false : true;
+}
+当然有一种更简单的办法可以确保onkeypress模仿onclick事件的行为；
+ link[i].onkeypress = link[i].onclick ;
+这条语句直接把onclik事件的所以功能赋给了onkeypress事件’
+小心onkeypress,这个事件处理函数很容易出问题：在几乎所有的浏览器里，用tap键移动到某个链接并按下回车键都会触发onclick事件。
+最好不要用onkeypress事件处理函数，onclick事件处理函数以及很满足需要。他对键盘访问的支持相当完美；
+
+7.1 一些传统方法--动态创建标记：document.write 和innerHTML。
+深入剖析DOM方法：createElement、createTextNode、appendChild和insertBefore.
+在html中链接外部js文件是的格式：
+<script src="text01.js"  ></script>，在使用方法函数前，确保该函数已经加载好
+7.1.2 innerHTML属性
+就innerHTML属性看来，id为testdiv的标记里面只有一个值为
+<p>This is <em>my</em>content.</p>的整个html字符串；
+很明显，这个innerHTML属性毫无细节可言，他就像一个大锤一样粗放；
+他既支持读取，也支持写入，读出元素的HTML的内容，也可以写入HTML的内容到元素。
+利用这个技术无法区分“插入一段HTML内容”和“替换一段HTML内容”。
+innerHTML属性不会返回任何对刚插入的内容的引用；类似于document.write方法,innerHTML属性也是HTML专有属性，不能用于任何其他标记语言文档；
+
+7.2 DOM方法
+以动态方式实时创建标记并不是在创建标记，而是在改变DOM节点树。
+createElement方法
+有两个步骤：
+a.创建一个新的元素：document.createElement（nodeName）；
+创建好的元素属于一个文档碎片；，还没有插入到节点树，无法显示在浏览器的窗口画面上。
+只是拥有一个nodeType和一个nodeName值/
+b.把这个元素插入节点树；
+
+7.2.2 appendChild 方法  
+把新创建的节点插入到某个文档的节点树的最简单的办法是：让他成为这个文档的某个现有节点的一个子节点。
+parent.appendChild(child)
+
+7.2.3crateTextNode 方法
+
+虽然创建了元素点，也安插进了现有节点上，但是他还是空白的。需要把一些文本放进p元素，这时候就需要创建一个文本节点，可以用createTextNode方法来实现它。
+document.createTextNode(text)；
+例如;
+document.createTextNode("hello world");
+
+7.2.4 一个更加复杂的组合
+这是一种创建节点和赋值穿插的方式
+
+
+或者是这样的方式：先创建在赋值
+7.3 重回图片库
+为了把html中的最后一个占位的图片和描述的结构和行为彻底分开。可以使用DOM的方法来创建他们。
+//document.getElementsByTagName("body")[0].appendChild(description);等同于下面的
+document.body.appendChild(description);
+
+7.3.1 在已有的元素前插入一个新的元素
+DOM提供了名为insertBefore（）方法，这个方法将一个新元素插入到一个现有的元素的前面。在调用此方法时，你必须告诉他三件事l
+a.新元素：你想插入的元素（newElement);
+b.目标元素，你想吧这个元素插到那个元素之前。
+c.父元素：目标元素的父元素；
+这个方法的调用语法：
+parentElement.insertBefore(newElement,targetElement)
+
+除了insertBefore（），但本身没有insertAfter();但可以自己编写这个函数；
+insertAfter()
+function insertAfter(newElement,targetElement){
+    var parent = targetElement.parentNode;
+    if(parent.lastChild == targetElement){
+        parent.appendChild(newElement);
+    }else {
+        parent.insertBefore(newElement,targetElement.nextSibling);
+    }
+}
+
+7.3.3图片库的第2次改进
+
+目前已经实现了图片库的结构、样式、和行为彻底分离了
+
+7.4    Ajax技术----侯君多时
+Ajax的主要优势就是对页面的请求以异步方式发送到服务器。而服务器不会用整个页面来相应请求，它会在后台处理请求，与此同时，用户还能继续浏览页面并于页面交互。你的脚本则可以a按需加载和创建页面内容，而不会打断用户的浏览体验。
+
+Ajax依赖javascript，所以可能有浏览器不支持。需要测试；
+7.4.1 XMLHttpRequest 对象
+Ajax技术的核心就是XMlHttpRequest对象。 他充当着浏览器脚本（客户端）与服务器之间的中间人角色。javascript可以通过这个对象自己发送请求。同时自己处理请求；
+但不同浏览器实现这个对象的方式不太一样。所以你需要写不同的代码分支来跨浏览器；
+这个对象中最有用的是open()方法。他就用来制定夫曲奇上将要访问的文件，制定请求类型：GET POST或SEND方法。这个方法的第三个参数用于指定请求是否以异步方式发送和处理。
+ 
+onreadystatechange制定函数引用时，不用在函数名后面加括号。因为加括号表示立即调用函数。
+
+request.onresdystatechange = doSomething；
+服务器在向XHLHttpRequest对象发回相应，改对象有许多属性可用，浏览器会在不同阶段更新readyState属性的值，它有5个可能的值：
+0 表示未初始化
+1 表示正在加载
+2 表示加载完毕
+3 表示正在交互
+4 表示完成
+只有readyState属性的值变成了4，就可以访问服务器发送回来的数据了。
+访问服务器发送回来的数据要通过两个属性完成。一个是responseText属性。这个属于保存文本字符串形式的数据。另一个属性是responseXML属性，用于保存Content-Type头部中指定为“text/xml”的数据，其实是一个DocumentFragment对象。
+在使用Ajax时，千万注意同源策略。使用XHLHttpRequest对象发生的请求只能访问与其所在的HTML处于同一个域的数据，不能像其他域发送请求。
+异步请求有一个容易被忽略的问题就是异步性，就是脚本在发生XHLHttpRequest请求后，仍然会继续执行，不会等待响应返回。
+
+Ajax技术的应用的一个特色就是减少重复加载页面的次数。但是这种缺乏状态记录的技术会与浏览器的一些使用惯例产生冲突，导致用户无法使用后退按钮或者无法为特点状态下的页面添加书签。应此，web设计人员必须向服务器发出请求和服务器返回相应时，给用户明确的提示；
+把Ajax功能看作一般的javascript增强功能，在平稳退化的基础上求得渐进增强。
+7.4.2  渐进增强。
+构建Ajax网站的最好方法，也是先构建一个常规的网站，然后Hijax它。
+
+7.4.3 Hijax ----渐进增强地使用Ajax
+Ajax应用主要依赖后台服务器，实际上是服务器端的脚本语言完成了绝大部分的工作，XMLHttpRequest对象作为浏览器和服务器之间的“中间人”,他只是负责传递请求和相应。
+
+
+
+第八章 充实文档内容
+两个重要的原则：
+渐进增强（progressive enhancement）:
+你应该总是从最核心的部分你，从内容开始。根据内容使用标记实现良好的结构；然后再逐步加强这些内容。这些增强工作既可以是通过CSS改进呈现效果，也可以是通过DOM添加各种行为。 内容应该在刚开始就写文档时就成为文档的组成部分；
+平稳退化：渐进增强的实现必然支持平稳退化；
+
+绝大多数的内容在Web浏览器是都是不显示的。只有极少数属性例外，但不同的浏览器在呈现这些例外的属性时却常常千姿百态。在显示属性这里，可以利用DOM编程，重新控制；，为网页添加一些实用的小部件‘
+1.得到隐藏在属性里的信息；
+2.创建标记封装这些信息；
+3.把这些标记插入到文档；
+当然，这与利用DOM去新建一些内容有区别，这些内容已经存在标记之中。而是利用javascript和DOM复制这些内容并以另外一种结构呈现他们；
+
+8.3 内容
+What  is  the  Document  Object  Model?
+The  W3C  defines  the  DOM  as:
+A platform- and  language-neutral  interface  that  will  allow programs
+and  scripts  to  dynamically access  and  update  the
+content ,  structure  and  style  of  documents.
+It  is  an  API  t ha t  can  be  used  to  navigate  HTML and  XML  documents  
+
+<abbr> 是 abbreviation 简略的意思；缩略；在HTML5中，他替代了<acronym》
+<blockquote>是块引用，引文区块。
+
+HTML5的文档类型标记
+<!DOCTYPE html>简单好记，容易输入，同时支持HTML和XHTML
+
+第九章 CSS-DOM
+a.style属性
+b.如何检索样式
+c.如何改变样式
+
+
+
+
+
